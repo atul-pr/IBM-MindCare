@@ -1,0 +1,107 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Dashboard Overview{% endblock %}
+{% block page_title %}Dashboard Overview{% endblock %}
+
+{% block stats %}
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-icon purple">
+            <i class="fas fa-users"></i>
+        </div>
+        <div class="stat-info">
+            <h3>{{ stats.total_users }}</h3>
+            <p>Total Users</p>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon green">
+            <i class="fas fa-user-check"></i>
+        </div>
+        <div class="stat-info">
+            <h3>{{ stats.active_users }}</h3>
+            <p>Active Users</p>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon blue">
+            <i class="fas fa-comments"></i>
+        </div>
+        <div class="stat-info">
+            <h3>{{ stats.total_chats }}</h3>
+            <p>Total Chats</p>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon red">
+            <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <div class="stat-info">
+            <h3>{{ stats.crisis_events }}</h3>
+            <p>Crisis Events</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<!-- Recent Activity -->
+<div class="content-section">
+    <h2>Recent User Activity</h2>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Last Login</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in recent_users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.last_login.strftime('%Y-%m-%d %H:%M') if user.last_login else 'Never' }}</td>
+                    <td>
+                        <span class="badge {{ 'badge-success' if user.is_active else 'badge-danger' }}">
+                            {{ 'Active' if user.is_active else 'Inactive' }}
+                        </span>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('admin.user_detail', user_id=user.id) }}" class="btn-sm btn-primary">
+                            <i class="fas fa-eye"></i> View
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Recent Crisis Events -->
+{% if recent_crises %}
+<div class="content-section">
+    <h2>Recent Crisis Events</h2>
+    <div class="crisis-list">
+        {% for crisis in recent_crises %}
+        <div class="crisis-item">
+            <div class="crisis-icon">
+                <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <div class="crisis-info">
+                <strong>{{ crisis.crisis_type.replace('_', ' ').title() }}</strong>
+                <p>{{ crisis.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+{% endblock %}

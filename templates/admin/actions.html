@@ -1,0 +1,58 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Admin Action Log{% endblock %}
+{% block page_title %}Admin Action Log{% endblock %}
+
+{% block content %}
+<div class="content-section">
+    <h2>Audit Trail</h2>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Admin</th>
+                    <th>Action</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for action in actions %}
+                <tr>
+                    <td>{{ action.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                    <td>{{ action.admin.username }}</td>
+                    <td>
+                        {% if action.target_user_id %}
+                        <a href="{{ url_for('admin.user_detail', user_id=action.target_user_id) }}"
+                            style="text-decoration: none;">
+                            <span class="badge badge-info"
+                                style="background: #e7f3ff; color: #0084ff; transition: 0.3s; cursor: pointer;">
+                                {{ action.action.replace('_', ' ').title() }}
+                            </span>
+                        </a>
+                        {% else %}
+                        <span class="badge" style="background: #f8f9fa; color: #666;">
+                            {{ action.action.replace('_', ' ').title() }}
+                        </span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <small>
+                            {% if action.target_user and action.action != 'view_user_data' %}
+                            <strong>User: {{ action.target_user.username }}</strong><br>
+                            {% endif %}
+                            {{ action.details if action.details else 'No additional context provided.' }}
+                        </small>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4" style="text-align: center; padding: 40px; color: #666;">No admin actions logged yet.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

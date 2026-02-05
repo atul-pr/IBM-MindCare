@@ -1,0 +1,135 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}User Detail: {{ user.username }}{% endblock %}
+{% block page_title %}User Detail: {{ user.username }}{% endblock %}
+
+{% block stats %}
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-icon blue"><i class="fas fa-comments"></i></div>
+        <div class="stat-info">
+            <h3>{{ stats.total_chats }}</h3>
+            <p>Total Chats</p>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon green"><i class="fas fa-smile"></i></div>
+        <div class="stat-info">
+            <h3>{{ stats.avg_mood }}</h3>
+            <p>Avg Mood Score</p>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon purple"><i class="fas fa-heart"></i></div>
+        <div class="stat-info">
+            <h3>{{ stats.total_moods }}</h3>
+            <p>Mood Logs</p>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon red"><i class="fas fa-exclamation-triangle"></i></div>
+        <div class="stat-info">
+            <h3>{{ stats.crisis_count }}</h3>
+            <p>Crisis Events</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
+    <!-- Left Column -->
+    <div>
+        <div class="content-section">
+            <h2>Recent Chat History</h2>
+            <div style="max-height: 400px; overflow-y: auto; padding: 10px; background: #f8f9fa; border-radius: 8px;">
+                {% for msg in messages %}
+                <div class="message-item {{ 'user-message' if msg.sender == 'user' else 'bot-message' }}"
+                    style="margin-bottom: 15px; padding: 10px; border-radius: 8px; border: 1px solid #eee;">
+                    <strong class="{{ 'user-text' if msg.sender == 'user' else 'bot-text' }}">{{
+                        msg.sender|title }}</strong>
+                    <span style="font-size: 0.8rem; color: #999; margin-left: 10px;">{{ msg.timestamp.strftime('%H:%M')
+                        }}</span>
+                    <p style="margin-top: 5px; line-height: 1.4;">{{ msg.message }}</p>
+                </div>
+                {% else %}
+                <p style="text-align: center; color: #999;">No messages found.</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Mood Log History</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Score</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for mood in moods %}
+                        <tr>
+                            <td>{{ mood.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                            <td>{{ mood.mood_score }}/5</td>
+                            <td>
+                                <span class="badge" style="background: rgba(99, 102, 241, 0.1); color: #6366f1;">{{
+                                    mood.mood_score }}</span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column -->
+    <div>
+        <div class="content-section">
+            <h2>Account Info</h2>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Joined:</strong> {{ user.created_at.strftime('%Y-%m-%d') }}</p>
+            <p><strong>Last Login:</strong> {{ user.last_login.strftime('%Y-%m-%d %H:%M') if user.last_login else
+                'Never' }}</p>
+            <p><strong>Status:</strong>
+                <span class="badge {{ 'badge-success' if user.is_active else 'badge-danger' }}">{{ 'Active' if
+                    user.is_active else 'Inactive' }}</span>
+            </p>
+
+            <div style="margin-top: 30px; display: flex; flex-direction: column; gap: 10px;">
+                <form action="{{ url_for('admin.toggle_user_status', user_id=user.id) }}" method="POST">
+                    <button type="submit" class="btn-sm {{ 'btn-warning' if user.is_active else 'btn-success' }}"
+                        style="width: 100%; justify-content: center; color: white; border: none; cursor: pointer;">
+                        {{ 'Deactivate Account' if user.is_active else 'Activate Account' }}
+                    </button>
+                </form>
+                <form action="{{ url_for('admin.delete_user', user_id=user.id) }}" method="POST"
+                    onsubmit="return confirm('Are you sure?');">
+                    <button type="submit" class="btn-sm btn-danger"
+                        style="width: 100%; justify-content: center; border: none; cursor: pointer;">Delete
+                        Account</button>
+                </form>
+            </div>
+        </div>
+
+        {% if crises %}
+        <div class="content-section" style="border-top: 5px solid #dc3545;">
+            <h2>Crisis Alerts</h2>
+            <div class="crisis-list">
+                {% for crisis in crises %}
+                <div class="crisis-item">
+                    <div class="crisis-info">
+                        <strong>{{ crisis.crisis_type|title }}</strong>
+                        <p>{{ crisis.timestamp.strftime('%Y-%m-%d %H:%M') }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

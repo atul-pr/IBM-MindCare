@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Admin Panel{% endblock %} | MindCare AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+    <script src="{{ url_for('static', filename='theme.js') }}"></script>
+</head>
+
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-user-shield"></i>
+                <h2>MindCare Admin</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="{{ url_for('admin.dashboard') }}"
+                    class="nav-item {{ 'active' if request.endpoint == 'admin.dashboard' }}">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+                <a href="{{ url_for('admin.users') }}"
+                    class="nav-item {{ 'active' if request.endpoint == 'admin.users' or request.endpoint == 'admin.user_detail' }}">
+                    <i class="fas fa-users"></i> User Management
+                </a>
+                <a href="{{ url_for('admin.analytics') }}"
+                    class="nav-item {{ 'active' if request.endpoint == 'admin.analytics' }}">
+                    <i class="fas fa-chart-pie"></i> Analytics
+                </a>
+                <a href="{{ url_for('admin.admin_actions') }}"
+                    class="nav-item {{ 'active' if request.endpoint == 'admin.admin_actions' }}">
+                    <i class="fas fa-history"></i> Action Logs
+                </a>
+                <a href="{{ url_for('chat_page') }}" class="nav-item">
+                    <i class="fas fa-comment-medical"></i> Talk to AI
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="{{ url_for('index') }}" class="nav-item">
+                    <i class="fas fa-external-link-alt"></i> View Site
+                </a>
+                <a href="{{ url_for('auth.logout') }}" class="nav-item">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h1>{% block page_title %}Dashboard{% endblock %}</h1>
+                        <p>Welcome back, {{ current_user.username }}</p>
+                    </div>
+                    <div style="display: flex; gap: 15px; align-items: center;">
+                        <button class="theme-toggle-btn" onclick="ThemeManager.toggle()" title="Toggle Theme"
+                            style="background: none; border: 1px solid #ddd; padding: 8px 12px; border-radius: 8px; cursor: pointer;">
+                            <i class="fas fa-moon theme-toggle-icon"></i>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="badge badge-{{ 'success' if category == 'success' else 'danger' }}"
+                style="display: block; margin-bottom: 20px; padding: 12px;">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            {% block stats %}{% endblock %}
+
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+</body>
+
+</html>

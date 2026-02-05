@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindCare - Mental Health Support</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='theme.js') }}"></script>
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-brain logo-icon"></i>
+                    <span class="logo-text">MindCare</span>
+                </div>
+                <div class="tagline">
+                    <i class="fas fa-heart pulse-icon"></i>
+                    Your 24/7 Mental Health Companion
+                </div>
+            </div>
+            <div class="header-buttons">
+                <button class="theme-toggle-btn" onclick="ThemeManager.toggle()" title="Toggle Theme">
+                    <i class="fas fa-moon theme-toggle-icon"></i>
+                </button>
+                <button class="mood-btn" onclick="showMoodTracker()">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Track Mood</span>
+                </button>
+                <button class="resources-btn" onclick="showResources()">
+                    <i class="fas fa-book-medical"></i>
+                    <span>Resources</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Chat Container -->
+        <div class="chat-container" id="chatContainer">
+            <!-- Welcome Message -->
+            <div class="message bot-message fade-in">
+                <div class="message-avatar">
+                    <i class="fas fa-user-nurse"></i>
+                </div>
+                <div class="message-wrapper">
+                    <div class="message-content">
+                        <p class="greeting">Hello! I'm here to listen and support you. 💙</p>
+                        <p>You can talk to me about anything that's on your mind. Your conversation is private and safe.
+                        </p>
+                        <p class="question">How are you feeling today?</p>
+                    </div>
+                    <div class="timestamp">Just now</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Typing Indicator -->
+        <div class="typing-indicator" id="typingIndicator" style="display: none;">
+            <div class="message-avatar">
+                <i class="fas fa-user-nurse"></i>
+            </div>
+            <div class="typing-bubble">
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            </div>
+        </div>
+
+        <!-- Quick Actions - Compact Version -->
+        <div class="quick-actions" id="quickActions">
+            <div class="quick-action" onclick="sendQuickMessage('I need someone to talk to')">
+                <i class="fas fa-comments"></i>
+                <span>Need to talk</span>
+            </div>
+            <div class="quick-action" onclick="sendQuickMessage('I\'m feeling anxious')">
+                <i class="fas fa-heartbeat"></i>
+                <span>Feeling anxious</span>
+            </div>
+            <div class="quick-action" onclick="sendQuickMessage('I\'m feeling sad')">
+                <i class="fas fa-cloud-rain"></i>
+                <span>Feeling sad</span>
+            </div>
+            <div class="quick-action" onclick="sendQuickMessage('I want breathing exercises')">
+                <i class="fas fa-wind"></i>
+                <span>Breathing exercise</span>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="input-area">
+            <button class="attach-btn" onclick="showOptions()">
+                <i class="fas fa-plus"></i>
+            </button>
+            <textarea id="messageInput" placeholder="Type your message here..." rows="1"
+                onkeydown="handleKeyPress(event)" oninput="autoResize(this)"></textarea>
+            <button class="send-btn" onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+
+        <!-- Mood Tracker Modal -->
+        <div class="modal" id="moodModal">
+            <div class="modal-overlay" onclick="closeMoodTracker()"></div>
+            <div class="modal-content slide-up">
+                <div class="modal-header">
+                    <h2>
+                        <i class="fas fa-smile"></i>
+                        How are you feeling today?
+                    </h2>
+                    <button class="close-btn" onclick="closeMoodTracker()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="mood-selector">
+                    <button class="mood-option" onclick="logMood(1)" data-mood="very-bad">
+                        <span class="mood-emoji">😢</span>
+                        <span class="mood-label">Very Bad</span>
+                        <div class="mood-ring"></div>
+                    </button>
+                    <button class="mood-option" onclick="logMood(2)" data-mood="bad">
+                        <span class="mood-emoji">😔</span>
+                        <span class="mood-label">Bad</span>
+                        <div class="mood-ring"></div>
+                    </button>
+                    <button class="mood-option" onclick="logMood(3)" data-mood="okay">
+                        <span class="mood-emoji">😐</span>
+                        <span class="mood-label">Okay</span>
+                        <div class="mood-ring"></div>
+                    </button>
+                    <button class="mood-option" onclick="logMood(4)" data-mood="good">
+                        <span class="mood-emoji">🙂</span>
+                        <span class="mood-label">Good</span>
+                        <div class="mood-ring"></div>
+                    </button>
+                    <button class="mood-option" onclick="logMood(5)" data-mood="very-good">
+                        <span class="mood-emoji">😊</span>
+                        <span class="mood-label">Very Good</span>
+                        <div class="mood-ring"></div>
+                    </button>
+                </div>
+                <div class="mood-history" id="moodHistory">
+                    <h3>
+                        <i class="fas fa-history"></i>
+                        Recent Mood History
+                    </h3>
+                    <div id="moodHistoryContent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Crisis Alert Modal -->
+        <div class="crisis-modal" id="crisisModal" style="display: none;">
+            <div class="crisis-overlay"></div>
+            <div class="crisis-content pulse">
+                <div class="crisis-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="crisis-header">🆘 Immediate Support Available</div>
+                <div class="crisis-body" id="crisisMessage"></div>
+                <div class="crisis-actions">
+                    <button class="crisis-btn primary" onclick="callHotline()">
+                        <i class="fas fa-phone"></i>
+                        Call Hotline
+                    </button>
+                    <button class="crisis-btn secondary" onclick="closeCrisis()">
+                        <i class="fas fa-times"></i>
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resources Modal -->
+        <div class="modal" id="resourcesModal">
+            <div class="modal-overlay" onclick="closeResources()"></div>
+            <div class="modal-content slide-up">
+                <div class="modal-header">
+                    <h2>
+                        <i class="fas fa-book-medical"></i>
+                        Mental Health Resources
+                    </h2>
+                    <button class="close-btn" onclick="closeResources()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <i class="fas fa-phone-volume"></i>
+                        <h3>Helplines</h3>
+                        <p>24/7 crisis support hotlines</p>
+                    </div>
+                    <div class="resource-card">
+                        <i class="fas fa-book-open"></i>
+                        <h3>Self-Help</h3>
+                        <p>Guided exercises and techniques</p>
+                    </div>
+                    <div class="resource-card">
+                        <i class="fas fa-users"></i>
+                        <h3>Support Groups</h3>
+                        <p>Connect with others</p>
+                    </div>
+                    <div class="resource-card">
+                        <i class="fas fa-user-md"></i>
+                        <h3>Find Therapist</h3>
+                        <p>Professional help near you</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>

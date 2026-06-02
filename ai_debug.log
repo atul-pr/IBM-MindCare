@@ -376,3 +376,285 @@ INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a
  * Running on http://10.232.73.29:5000
 INFO:werkzeug:[33mPress CTRL+C to quit[0m
 INFO:werkzeug: * Restarting with stat
+DEBUG:faiss.loader:Environment variable FAISS_OPT_LEVEL is not set, so let's pick the instruction set according to the current CPU
+INFO:faiss.loader:Loading faiss with AVX2 support.
+INFO:faiss.loader:Successfully loaded faiss with AVX2 support.
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.232.73.29:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+DEBUG:faiss.loader:Environment variable FAISS_OPT_LEVEL is not set, so let's pick the instruction set according to the current CPU
+INFO:faiss.loader:Loading faiss with AVX2 support.
+INFO:faiss.loader:Successfully loaded faiss with AVX2 support.
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 851-489-734
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:56:29] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:56:29] "GET /static/style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:56:29] "GET /static/theme.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:56:30] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:56:37] "GET /register HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:56:38] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:56:38] "[36mGET /static/theme.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:56:47] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:56:47] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:56:47] "[36mGET /static/theme.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:56:53] "POST /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:56:53] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:56:53] "[36mGET /static/theme.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:56:58] "POST /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:56:59] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:56:59] "[36mGET /static/theme.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:57:03] "GET /register HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:57:03] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:57:03] "[36mGET /static/theme.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:57:12] "[32mGET /admin HTTP/1.1[0m" 308 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:57:12] "[32mGET /admin/ HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:57:12] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:57:12] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:57:13] "[36mGET /static/theme.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:57:18] "GET /register HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:57:18] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:57:18] "[36mGET /static/theme.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:57:31] "POST /register HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:57:31] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:57:31] "[36mGET /static/theme.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:57:44] "POST /register HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:57:44] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:57:44] "[36mGET /static/theme.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:57:59] "[32mPOST /register HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:57:59] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:58:00] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:58:00] "[36mGET /static/theme.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:58:10] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:58:11] "GET /dashboard HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:58:11] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:58:11] "[36mGET /static/theme.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:58:14] "GET /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:58:15] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:58:15] "[36mGET /static/theme.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:58:15] "GET /static/script.js HTTP/1.1" 200 -
+DEBUG:root:Detecting crisis in: 'hi'
+DEBUG:root:Checking relevance for: 'hi'
+DEBUG:root:Relevance: short message allowed
+INFO:sentence_transformers.base.model:No device provided, using cpu
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): huggingface.co:443
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 307 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/modules.json HTTP/1.1" 200 0
+DEBUG:filelock:Attempting to acquire lock 1859342753072 on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\952a9b81c0bfd99800fabf352f69c7ccd46c5e43.lock
+DEBUG:filelock:Lock 1859342753072 acquired on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\952a9b81c0bfd99800fabf352f69c7ccd46c5e43.lock
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "GET /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/modules.json HTTP/1.1" 200 349
+DEBUG:filelock:Attempting to release lock 1859342753072 on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\952a9b81c0bfd99800fabf352f69c7ccd46c5e43.lock
+DEBUG:filelock:Lock 1859342753072 released on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\952a9b81c0bfd99800fabf352f69c7ccd46c5e43.lock
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 307 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/config_sentence_transformers.json HTTP/1.1" 200 0
+DEBUG:filelock:Attempting to acquire lock 1859222542992 on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\fd1b291129c607e5d49799f87cb219b27f98acdf.lock
+DEBUG:filelock:Lock 1859222542992 acquired on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\fd1b291129c607e5d49799f87cb219b27f98acdf.lock
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "GET /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/config_sentence_transformers.json HTTP/1.1" 200 116
+DEBUG:filelock:Attempting to release lock 1859222542992 on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\fd1b291129c607e5d49799f87cb219b27f98acdf.lock
+DEBUG:filelock:Lock 1859222542992 released on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\fd1b291129c607e5d49799f87cb219b27f98acdf.lock
+INFO:sentence_transformers.base.model:Loading SentenceTransformer model from sentence-transformers/all-MiniLM-L6-v2.
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 307 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/config_sentence_transformers.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 307 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/README.md HTTP/1.1" 200 0
+DEBUG:filelock:Attempting to acquire lock 1859222542992 on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\44af2e3b0fa3a0b6239e48422972bf755f28fde0.lock
+DEBUG:filelock:Lock 1859222542992 acquired on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\44af2e3b0fa3a0b6239e48422972bf755f28fde0.lock
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "GET /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/README.md HTTP/1.1" 200 None
+DEBUG:filelock:Attempting to release lock 1859222542992 on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\44af2e3b0fa3a0b6239e48422972bf755f28fde0.lock
+DEBUG:filelock:Lock 1859222542992 released on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\44af2e3b0fa3a0b6239e48422972bf755f28fde0.lock
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 307 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/modules.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 307 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/sentence_bert_config.json HTTP/1.1" 200 0
+DEBUG:filelock:Attempting to acquire lock 1859221875168 on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\59d594003bf59880a884c574bf88ef7555bb0202.lock
+DEBUG:filelock:Lock 1859221875168 acquired on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\59d594003bf59880a884c574bf88ef7555bb0202.lock
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "GET /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/sentence_bert_config.json HTTP/1.1" 200 53
+DEBUG:filelock:Attempting to release lock 1859221875168 on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\59d594003bf59880a884c574bf88ef7555bb0202.lock
+DEBUG:filelock:Lock 1859221875168 released on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\59d594003bf59880a884c574bf88ef7555bb0202.lock
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 307 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/config.json HTTP/1.1" 200 0
+DEBUG:filelock:Attempting to acquire lock 1859221875168 on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\72b987fd805cfa2b58c4c8c952b274a11bfd5a00.lock
+DEBUG:filelock:Lock 1859221875168 acquired on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\72b987fd805cfa2b58c4c8c952b274a11bfd5a00.lock
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "GET /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/config.json HTTP/1.1" 200 612
+DEBUG:filelock:Attempting to release lock 1859221875168 on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\72b987fd805cfa2b58c4c8c952b274a11bfd5a00.lock
+DEBUG:filelock:Lock 1859221875168 released on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\72b987fd805cfa2b58c4c8c952b274a11bfd5a00.lock
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/model.safetensors HTTP/1.1" 302 0
+DEBUG:filelock:Attempting to acquire lock 1859222725136 on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db.lock
+DEBUG:filelock:Lock 1859222725136 acquired on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db.lock
+WARNING:huggingface_hub.file_download:Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "GET /sentence-transformers/all-MiniLM-L6-v2/resolve/main/model.safetensors HTTP/1.1" 302 1339
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): cas-bridge.xethub.hf.co:443
+DEBUG:urllib3.connectionpool:https://cas-bridge.xethub.hf.co:443 "GET /xet-bridge-us/621ffdc136468d709f180294/789fdf16a3e59f4fbfb6002967ecee539a198dadb5be74ca549aa7dc9b1b55fb?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=cas%2F20260602%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260602T150946Z&X-Amz-Expires=3600&X-Amz-Signature=24bae2be74e5738fbeecf4adde656fed1e4429d78c6f8f689819f84cac004600&X-Amz-SignedHeaders=host&X-Xet-Cas-Uid=public&response-content-disposition=inline%3B+filename*%3DUTF-8%27%27model.safetensors%3B+filename%3D%22model.safetensors%22%3B&x-amz-checksum-mode=ENABLED&x-id=GetObject&Expires=1780416586&Policy=eyJTdGF0ZW1lbnQiOlt7IkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc4MDQxNjU4Nn19LCJSZXNvdXJjZSI6Imh0dHBzOi8vY2FzLWJyaWRnZS54ZXRodWIuaGYuY28veGV0LWJyaWRnZS11cy82MjFmZmRjMTM2NDY4ZDcwOWYxODAyOTQvNzg5ZmRmMTZhM2U1OWY0ZmJmYjYwMDI5NjdlY2VlNTM5YTE5OGRhZGI1YmU3NGNhNTQ5YWE3ZGM5YjFiNTVmYioifV19&Signature=JMmKGyAoTgcHi43y7fzAMZykqxDi041Jgqrba0C03EkUV5mInJBSPkiy0xQntCQFrvTG1v3AFQbFukFuDm59YQeJLLoisHv69g-7ReRpCt-a8gwhNNv-TkGV8xmKvtz2sTXtHZWzExo1GMlu8cj7biocKuga8InRwDgEEWTaBGGrmS657Iq2R-PlocQBMbMaHJaDVI7eQdiKcywqp35o8xlwQvgWlEpvkaULgn9AaXMrwcP14F3VwHzSsdSXSnXQtp0ofpklLhE2ByKcMS1awDR2Im6N0zzrWxhwgWMeCwuvmyARO4P7W7TxvhEZ9946vVIiPTQnvLsdaXOA5zjbRA__&Key-Pair-Id=K2L8F4GPSG1IFC HTTP/1.1" 200 90868376
+DEBUG:filelock:Attempting to release lock 1859222725136 on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db.lock
+DEBUG:filelock:Lock 1859222725136 released on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db.lock
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/processor_config.json HTTP/1.1" 404 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/preprocessor_config.json HTTP/1.1" 404 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/video_preprocessor_config.json HTTP/1.1" 404 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/preprocessor_config.json HTTP/1.1" 404 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 307 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/tokenizer_config.json HTTP/1.1" 200 0
+DEBUG:filelock:Attempting to acquire lock 1859223324336 on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\c79f2b6a0cea6f4b564fed1938984bace9d30ff0.lock
+DEBUG:filelock:Lock 1859223324336 acquired on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\c79f2b6a0cea6f4b564fed1938984bace9d30ff0.lock
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "GET /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/tokenizer_config.json HTTP/1.1" 200 350
+DEBUG:filelock:Attempting to release lock 1859223324336 on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\c79f2b6a0cea6f4b564fed1938984bace9d30ff0.lock
+DEBUG:filelock:Lock 1859223324336 released on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\c79f2b6a0cea6f4b564fed1938984bace9d30ff0.lock
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 307 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/config.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 307 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/tokenizer_config.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=False&expand=False HTTP/1.1" 404 64
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main?recursive=True&expand=False HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/vocab.txt HTTP/1.1" 307 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/vocab.txt HTTP/1.1" 200 0
+DEBUG:filelock:Attempting to acquire lock 1859223324608 on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\fb140275c155a9c7c5a3b3e0e77a9e839594a938.lock
+DEBUG:filelock:Lock 1859223324608 acquired on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\fb140275c155a9c7c5a3b3e0e77a9e839594a938.lock
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "GET /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/vocab.txt HTTP/1.1" 200 None
+DEBUG:filelock:Attempting to release lock 1859223324608 on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\fb140275c155a9c7c5a3b3e0e77a9e839594a938.lock
+DEBUG:filelock:Lock 1859223324608 released on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\fb140275c155a9c7c5a3b3e0e77a9e839594a938.lock
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer.json HTTP/1.1" 307 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/tokenizer.json HTTP/1.1" 200 0
+DEBUG:filelock:Attempting to acquire lock 1859221616720 on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\cb202bfe2e3c98645018a6d12f182a434c9d3e02.lock
+DEBUG:filelock:Lock 1859221616720 acquired on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\cb202bfe2e3c98645018a6d12f182a434c9d3e02.lock
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "GET /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/tokenizer.json HTTP/1.1" 200 None
+DEBUG:filelock:Attempting to release lock 1859221616720 on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\cb202bfe2e3c98645018a6d12f182a434c9d3e02.lock
+DEBUG:filelock:Lock 1859221616720 released on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\cb202bfe2e3c98645018a6d12f182a434c9d3e02.lock
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/added_tokens.json HTTP/1.1" 404 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/special_tokens_map.json HTTP/1.1" 307 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/special_tokens_map.json HTTP/1.1" 200 0
+DEBUG:filelock:Attempting to acquire lock 1859221616720 on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\e7b0375001f109a6b8873d756ad4f7bbb15fbaa5.lock
+DEBUG:filelock:Lock 1859221616720 acquired on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\e7b0375001f109a6b8873d756ad4f7bbb15fbaa5.lock
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "GET /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/special_tokens_map.json HTTP/1.1" 200 112
+DEBUG:filelock:Attempting to release lock 1859221616720 on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\e7b0375001f109a6b8873d756ad4f7bbb15fbaa5.lock
+DEBUG:filelock:Lock 1859221616720 released on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\e7b0375001f109a6b8873d756ad4f7bbb15fbaa5.lock
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/chat_template.jinja HTTP/1.1" 404 0
+DEBUG:sentence_transformers.base.modules.transformer:Active modality config: {'text': {'method': 'forward', 'method_output_name': 'last_hidden_state'}}
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/1_Pooling/config.json HTTP/1.1" 307 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/1_Pooling%2Fconfig.json HTTP/1.1" 200 0
+DEBUG:filelock:Attempting to acquire lock 1859221352000 on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\d1514c3162bbe87b343f565fadc62e6c06f04f03.lock
+DEBUG:filelock:Lock 1859221352000 acquired on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\d1514c3162bbe87b343f565fadc62e6c06f04f03.lock
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "GET /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/1_Pooling%2Fconfig.json HTTP/1.1" 200 190
+DEBUG:filelock:Attempting to release lock 1859221352000 on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\d1514c3162bbe87b343f565fadc62e6c06f04f03.lock
+DEBUG:filelock:Lock 1859221352000 released on C:\Users\Atul Prajapati\.cache\huggingface\hub\.locks\models--sentence-transformers--all-MiniLM-L6-v2\d1514c3162bbe87b343f565fadc62e6c06f04f03.lock
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "GET /api/models/meta-llama/Llama-3.2-1B-Instruct?expand=inferenceProviderMapping HTTP/1.1" 200 353
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): router.huggingface.co:443
+DEBUG:root:Detecting crisis in: 'i'm feeling sad'
+DEBUG:root:Checking relevance for: 'i'm feeling sad'
+DEBUG:root:Relevance match: sad
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): router.huggingface.co:443
+DEBUG:urllib3.connectionpool:https://router.huggingface.co:443 "POST /novita/v3/openai/chat/completions HTTP/1.1" 200 862
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:58:42] "POST /chat HTTP/1.1" 200 -
+DEBUG:urllib3.connectionpool:https://router.huggingface.co:443 "POST /novita/v3/openai/chat/completions HTTP/1.1" 200 704
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:58:43] "POST /chat HTTP/1.1" 200 -
+DEBUG:root:Detecting crisis in: 'whats your name'
+DEBUG:root:Checking relevance for: 'whats your name'
+DEBUG:root:Relevance: short message allowed
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): router.huggingface.co:443
+DEBUG:urllib3.connectionpool:https://router.huggingface.co:443 "POST /novita/v3/openai/chat/completions HTTP/1.1" 200 856
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:58:57] "POST /chat HTTP/1.1" 200 -
+DEBUG:root:Detecting crisis in: 'tell me your name again'
+DEBUG:root:Checking relevance for: 'tell me your name again'
+DEBUG:root:Relevance: default allowed
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): router.huggingface.co:443
+DEBUG:urllib3.connectionpool:https://router.huggingface.co:443 "POST /novita/v3/openai/chat/completions HTTP/1.1" 200 838
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:59:15] "POST /chat HTTP/1.1" 200 -
+DEBUG:root:Detecting crisis in: 'again'
+DEBUG:root:Checking relevance for: 'again'
+DEBUG:root:Relevance: short message allowed
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): router.huggingface.co:443
+DEBUG:urllib3.connectionpool:https://router.huggingface.co:443 "POST /novita/v3/openai/chat/completions HTTP/1.1" 200 1157
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:59:21] "POST /chat HTTP/1.1" 200 -
+DEBUG:root:Detecting crisis in: 'tell me about iran war'
+DEBUG:root:Checking relevance for: 'tell me about iran war'
+DEBUG:root:Relevance: default allowed
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): router.huggingface.co:443
+DEBUG:urllib3.connectionpool:https://router.huggingface.co:443 "POST /novita/v3/openai/chat/completions HTTP/1.1" 200 1130
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 20:59:45] "POST /chat HTTP/1.1" 200 -
+DEBUG:root:Detecting crisis in: 'i'm feeling anxious'
+DEBUG:root:Checking relevance for: 'i'm feeling anxious'
+DEBUG:root:Relevance match: anxious
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): router.huggingface.co:443
+DEBUG:urllib3.connectionpool:https://router.huggingface.co:443 "POST /novita/v3/openai/chat/completions HTTP/1.1" 200 1027
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:00:31] "POST /chat HTTP/1.1" 200 -
+DEBUG:root:Detecting crisis in: 'actually i like a girl in my college tell me how can i approach her'
+DEBUG:root:Checking relevance for: 'actually i like a girl in my college tell me how can i approach her'
+DEBUG:root:Relevance: default allowed
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): router.huggingface.co:443
+DEBUG:urllib3.connectionpool:https://router.huggingface.co:443 "POST /novita/v3/openai/chat/completions HTTP/1.1" 200 1070
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:01:06] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:02:49] "GET /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:02:50] "GET /static/style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:02:50] "[36mGET /static/theme.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:02:50] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:05:16] "GET /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:05:16] "GET /static/style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:05:16] "[36mGET /static/theme.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:05:16] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:06:42] "GET /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:06:42] "GET /static/style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:06:42] "[36mGET /static/theme.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:06:42] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:08:26] "GET /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:08:26] "GET /static/style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:08:26] "[36mGET /static/theme.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:08:26] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:11:11] "GET /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:11:11] "GET /static/style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:11:11] "[36mGET /static/theme.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:11:11] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:11:41] "GET /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:11:42] "[36mGET /static/theme.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:11:42] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:11:42] "GET /static/style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:13:38] "GET /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:13:38] "GET /static/style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:13:38] "[36mGET /static/theme.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:13:38] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:13:56] "GET /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:13:57] "[36mGET /static/theme.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:13:57] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:13:57] "GET /static/style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:14:14] "GET /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:14:15] "[36mGET /static/theme.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:14:15] "GET /static/style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:14:15] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:14:29] "GET /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:14:29] "[36mGET /static/theme.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:14:29] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:14:29] "GET /static/style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:14:41] "POST /mood HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:15:00] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:15:00] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:15:00] "[36mGET /static/theme.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:15:06] "[32mGET /register HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:15:06] "GET /dashboard HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:15:07] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:15:07] "[36mGET /static/theme.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:15:11] "GET /mood-history-page HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:15:12] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:15:12] "[36mGET /static/theme.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:15:12] "GET /mood-history HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:15:19] "GET /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:15:20] "[36mGET /static/theme.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:15:20] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:15:20] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:15:23] "GET /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:15:23] "[36mGET /static/theme.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:15:23] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:15:23] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:15:30] "GET /mood-history-page HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:15:30] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:15:30] "[36mGET /static/theme.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:15:31] "GET /mood-history HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:15:36] "[32mGET /logout HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:15:36] "GET /index.html HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:15:36] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jun/2026 21:15:37] "[36mGET /static/theme.js HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Detected change in 'D:\\project ibm\\mental-health-chatbot\\app.py', reloading
+INFO:werkzeug: * Restarting with stat
+DEBUG:faiss.loader:Environment variable FAISS_OPT_LEVEL is not set, so let's pick the instruction set according to the current CPU
+INFO:faiss.loader:Loading faiss with AVX2 support.
+INFO:faiss.loader:Successfully loaded faiss with AVX2 support.

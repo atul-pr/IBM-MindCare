@@ -3,10 +3,14 @@ HealSpace AI - Mental Health Support Chatbot with Authentication
 Provides 24/7 emotional support with crisis detection for Indian users
 """
 
+# Force CPU-only mode before importing ML libraries
+import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '-1'  # Disable CUDA/GPU
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'   # Reduce TensorFlow logging
+
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 from flask_login import login_required, current_user
 from datetime import datetime, timedelta
-import os
 from dotenv import load_dotenv
 
 # Load environment variables

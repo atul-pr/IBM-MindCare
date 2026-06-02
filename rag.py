@@ -20,7 +20,11 @@ HOW IT WORKS:
 7. AI generates response grounded in retrieved information
 """
 
+# Force CPU-only mode before importing ML libraries
 import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '-1'  # Disable CUDA/GPU
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'   # Reduce TensorFlow logging
+
 import pickle
 from typing import List, Dict, Optional
 from sentence_transformers import SentenceTransformer

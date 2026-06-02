@@ -2,6 +2,11 @@
 AI Integration Module - Mental Health Support with RAG
 """
 
+# Force CPU-only mode
+import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
 import random
 import logging
 from typing import Optional

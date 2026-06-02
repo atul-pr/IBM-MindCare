@@ -43,7 +43,7 @@ with app.app_context():
         from werkzeug.security import generate_password_hash
         admin_user = User(
             username='admin',
-            email='admin@healspace.com',
+            email='admin@healspace.ai',
             password_hash=generate_password_hash('Admin@123456'),
             role='admin'
         )

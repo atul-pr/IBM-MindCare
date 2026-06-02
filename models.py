@@ -151,21 +151,20 @@ def init_db(app):
         # Create all tables
         db.create_all()
         
-        # Create default admin user if not exists (check both username and email)
-        admin_by_user = User.query.filter_by(username='healspace_admin').first()
-        admin_by_email = User.query.filter_by(email='admin@healspace.ai').first()
+        # Create default admin user if not exists (check by email only)
+        admin_user = User.query.filter_by(email='admin@healspace.ai').first()
         
-        if not admin_by_user and not admin_by_email:
+        if not admin_user:
             admin = User(
-                username='healspace_admin',
+                username='admin',
                 email='admin@healspace.ai',
                 role='admin',
                 is_active=True
             )
-            admin.set_password('HealSpace@123')
+            admin.set_password('Admin@123456')
             db.session.add(admin)
             db.session.commit()
-            print("✓ Default admin user created (username: healspace_admin, password: HealSpace@123)")
+            print("✓ Default admin user created (email: admin@healspace.ai, password: Admin@123456)")
         elif admin_by_user and not admin_by_email:
             # Username exists but email is different? Update it or just skip
             pass

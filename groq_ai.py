@@ -20,7 +20,7 @@ load_dotenv()
 
 logger = logging.getLogger(__name__)
 
-GROQ_API_KEY = os.getenv('GROQ_API_KEY', '').strip()
+# Note: key is read dynamically inside call_groq_api() so hot-reload / late .env loading works
 
 # System prompt — same as HF module for consistency
 SYSTEM_PROMPT = (
@@ -68,14 +68,19 @@ def call_groq_api(user_message: str, context: str = "") -> Optional[str]:
     Returns:
         str: AI response text, or None if all models fail.
     """
-    if not GROQ_API_KEY or GROQ_API_KEY in ('', 'your-groq-api-key-here'):
-        logger.debug("No GROQ_API_KEY configured — skipping Groq")
+    # Read key dynamically so late-loaded .env values are always picked up
+    api_key = os.getenv('GROQ_API_KEY', '').strip()
+
+    if not api_key or api_key in ('', 'your-groq-api-key-here'):
+        logger.warning("[Groq] GROQ_API_KEY not set — skipping Groq, falling back to HuggingFace")
         return None
+
+    logger.info(f"[Groq] API key detected: {api_key[:8]}... — starting inference")
 
     try:
         from groq import Groq
     except ImportError:
-        logger.warning("groq package not installed — run: pip install groq")
+        logger.warning("[Groq] 'groq' package not installed — run: pip install groq")
         return None
 
     # Enrich system prompt with RAG context if available
@@ -83,7 +88,7 @@ def call_groq_api(user_message: str, context: str = "") -> Optional[str]:
     if context:
         system_content += f"\n\nRelevant mental health context:\n{context[:400]}"
 
-    client = Groq(api_key=GROQ_API_KEY)
+    client = Groq(api_key=api_key)
 
     for model_cfg in GROQ_MODELS:
         model_id   = model_cfg["id"]
@@ -125,12 +130,13 @@ def test_groq_api():
     print("TESTING GROQ API")
     print("=" * 60)
 
-    if not GROQ_API_KEY:
+    api_key = os.getenv('GROQ_API_KEY', '').strip()
+    if not api_key:
         print("\n❌ GROQ_API_KEY not set")
         print("   → Get a free key at https://console.groq.com")
         return False
 
-    print(f"\nAPI Key: {GROQ_API_KEY[:10]}...{GROQ_API_KEY[-4:]}")
+    print(f"\nAPI Key: {api_key[:10]}...{api_key[-4:]}")
 
     response = call_groq_api("I'm feeling stressed about my work. Any advice?")
 
@@ -140,6 +146,7 @@ def test_groq_api():
     else:
         print("\n❌ FAILED")
         return False
+
 
 
 if __name__ == "__main__":

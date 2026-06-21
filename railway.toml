@@ -1,13 +1,11 @@
 [build]
 builder = "nixpacks"
-
-[build.nixpacksPlan.phases.setup]
-nixPkgs = ["python311", "python311Packages.pip", "gcc", "g++", "cmake"]
+# nixpacks.toml handles the full build plan (packages, install, model pre-download)
+# railway.toml only controls deploy settings
 
 [deploy]
-# workers = (2 x CPU cores) + 1 is the standard formula
-# Railway Starter gives 1 shared vCPU → 3 workers is optimal
-# gevent worker: each worker handles many concurrent requests async (perfect for I/O-heavy HF API calls)
+# 3 gevent workers — optimal for 1 shared vCPU on Railway Starter plan
+# gevent = async I/O, perfect for concurrent HuggingFace/Groq API calls
 startCommand = "gunicorn app:app --workers=3 --worker-class=gevent --worker-connections=10 --timeout=120 --bind=0.0.0.0:$PORT --log-level=info --access-logfile=- --error-logfile=- --preload"
 healthcheckPath = "/health"
 healthcheckTimeout = 120

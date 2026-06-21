@@ -55,14 +55,22 @@ with app.app_context():
 from rag import initialize_rag
 initialize_rag()
 
-# Startup check: warn if HF API key is missing
+# Startup checks: show which AI providers are active
 import os as _os
-_hf_key = _os.getenv('HF_API_KEY', '')
-if not _hf_key or _hf_key in ('', 'your-huggingface-api-key-here'):
-    print("⚠️  WARNING: HF_API_KEY is not set! Chatbot will use fallback responses only.")
-    print("   → Set HF_API_KEY in Railway environment variables (Settings → Variables).")
+
+_groq_key = _os.getenv('GROQ_API_KEY', '').strip()
+if _groq_key and _groq_key not in ('', 'your-groq-api-key-here'):
+    print(f"✅ GROQ_API_KEY detected: {_groq_key[:8]}...  ← PRIMARY provider (fast!)")
 else:
-    print(f"✅ HF_API_KEY detected: {_hf_key[:8]}...")
+    print("⚠️  GROQ_API_KEY not set — will fall back to HuggingFace.")
+
+_hf_key = _os.getenv('HF_API_KEY', '').strip()
+if _hf_key and _hf_key not in ('', 'your-huggingface-api-key-here'):
+    print(f"✅ HF_API_KEY detected: {_hf_key[:8]}...  ← FALLBACK provider")
+else:
+    print("⚠️  WARNING: HF_API_KEY is not set! Chatbot will use pattern fallback only.")
+    print("   → Set HF_API_KEY in Railway environment variables (Settings → Variables).")
+
 
 # ============================================================================
 # PUBLIC ROUTES

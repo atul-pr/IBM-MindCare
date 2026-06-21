@@ -1,11 +1,12 @@
 [phases.setup]
-nixPkgs = ["python311", "python311Packages.pip", "gcc", "gcc-unwrapped", "g++", "cmake", "zlib", "libstdcxx5"]
+# Only use packages that exist in nixpacks' pinned Nixpkgs snapshot.
+# gcc already includes g++ and the standard C++ library — no need for gcc-unwrapped or libstdcxx5.
+nixPkgs = ["python311", "python311Packages.pip", "gcc", "cmake", "zlib"]
 
 [phases.install]
 cmds = [
     "pip install --upgrade pip",
     "pip install torch==2.2.2+cpu --extra-index-url https://download.pytorch.org/whl/cpu --no-cache-dir",
-    "pip install -r requirements.txt --no-deps --ignore-installed torch --no-cache-dir",
     "pip install -r requirements.txt --no-cache-dir"
 ]
 
@@ -15,4 +16,4 @@ cmds = [
 ]
 
 [start]
-cmd = "gunicorn app:app --workers=1 --timeout=300 --bind=0.0.0.0:$PORT --log-level=info --access-logfile=- --error-logfile=- --preload"
+cmd = "gunicorn app:app --workers=3 --worker-class=gevent --worker-connections=10 --timeout=120 --bind=0.0.0.0:$PORT --log-level=info --access-logfile=- --error-logfile=- --preload"

@@ -42,3 +42,5 @@ print('Embedding model pre-downloaded successfully')" \
     || echo "Model pre-download skipped — will download at first request"
 
 EXPOSE 8080
+
+CMD ["gunicorn", "app:app", "--workers=1", "--timeout=120", "--bind=0.0.0.0:8080", "--log-level=debug", "--access-logfile=-", "--error-logfile=-"]

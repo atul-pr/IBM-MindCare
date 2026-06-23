@@ -1,16 +1,3 @@
-[phases.setup]
-# Valid Nix packages only — gcc includes the C++ compiler automatically
-nixPkgs = ["python311", "python311Packages.pip", "gcc", "cmake", "zlib"]
-
-# DO NOT override [phases.install] — nixpacks auto-creates /opt/venv and uses
-# its own pip, which IS writable. Overriding it breaks venv setup and hits
-# the read-only Nix store (PEP 668 "externally managed" error).
-# Instead, torch CPU is specified directly in requirements.txt via --extra-index-url.
-
-[phases.build]
-cmds = [
-    "python -c \"import os; os.environ.setdefault('SENTENCE_TRANSFORMERS_HOME','/tmp/hf_cache'); from sentence_transformers import SentenceTransformer; SentenceTransformer('all-MiniLM-L6-v2', cache_folder='/tmp/hf_cache')\" || echo 'Model pre-download skipped (will download at runtime)'"
-]
-
-[start]
-cmd = "gunicorn app:app --workers=3 --worker-class=gevent --worker-connections=10 --timeout=120 --bind=0.0.0.0:$PORT --log-level=info --access-logfile=- --error-logfile=- --preload"
+# This file is intentionally left empty.
+# Railway is configured to use the Dockerfile (see railway.toml).
+# nixpacks is NOT used for this project.

@@ -1,8 +1,9 @@
-# Railway auto-detects Dockerfile — no builder specification needed.
+[build]
+# Force Docker builder so nixpacks.toml is ignored
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
 
 [deploy]
-# Using standard sync workers — more reliable for startup
-# gevent can cause silent failures when app has heavy ML imports
 startCommand = "gunicorn app:app --workers=1 --timeout=120 --bind=0.0.0.0:$PORT --log-level=debug --access-logfile=- --error-logfile=-"
 healthcheckPath = "/health"
 healthcheckTimeout = 300

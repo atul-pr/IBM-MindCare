@@ -213,11 +213,22 @@ def chat():
                 'timestamp': datetime.now().strftime('%H:%M')
             })
         
-        
-        # Normal conversation - get AI response
-        print(f"DEBUG: Getting AI response for message: {user_message[:50]}...")
-        bot_response = get_ai_response(user_message)
-        print(f"DEBUG: AI response received: {bot_response[:100] if bot_response else 'None'}...")
+        # Normal conversation - get AI response with conversation history
+        # Fetch last 10 messages for context (user + bot interleaved)
+        chat_history = []
+        if current_user.is_authenticated:
+            recent_msgs = Message.query.filter_by(user_id=current_user.id)\
+                .order_by(Message.timestamp.desc())\
+                .limit(10)\
+                .all()
+            # Reverse to chronological order, exclude the message we just saved
+            for m in reversed(recent_msgs[:-1] if len(recent_msgs) > 1 else []):
+                chat_history.append({
+                    'role': 'user' if m.sender == 'user' else 'assistant',
+                    'content': m.message[:500]  # limit each message to 500 chars
+                })
+
+        bot_response = get_ai_response(user_message, history=chat_history)
         
         # Save bot response (only if logged in)
         if current_user.is_authenticated:

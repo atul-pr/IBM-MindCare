@@ -60,14 +60,14 @@ GROQ_MODELS = [
 ]
 
 
-def call_groq_api(user_message: str, context: str = "") -> Optional[str]:
+def call_groq_api(user_message: str, context: str = "", history: list = None) -> Optional[str]:
     """
     Call Groq API for ultra-fast AI responses.
     Tries models in priority order; falls back to next on failure.
-
-    Returns:
-        str: AI response text, or None if all models fail.
     """
+    if history is None:
+        history = []
+
     # Read key dynamically so late-loaded .env values are always picked up
     api_key = os.getenv('GROQ_API_KEY', '').strip()
 
@@ -94,15 +94,19 @@ def call_groq_api(user_message: str, context: str = "") -> Optional[str]:
         model_id   = model_cfg["id"]
         max_tokens = model_cfg["max_tokens"]
 
+        # Build messages: system → history → current message
+        messages = [{"role": "system", "content": system_content}]
+        # Add conversation history (last N messages)
+        for msg in history[-8:]:  # limit to last 8 for token budget
+            messages.append({"role": msg["role"], "content": msg["content"]})
+        messages.append({"role": "user", "content": user_message})
+
         try:
-            logger.info(f"[Groq] Trying: {model_id}")
+            logger.info(f"[Groq] Trying: {model_id} ({len(messages)} messages)")
 
             response = client.chat.completions.create(
                 model=model_id,
-                messages=[
-                    {"role": "system", "content": system_content},
-                    {"role": "user",   "content": user_message},
-                ],
+                messages=messages,
                 max_tokens=max_tokens,
                 temperature=0.72,
                 top_p=0.9,

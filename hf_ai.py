@@ -84,29 +84,40 @@ MODELS = [
 REQUEST_TIMEOUT = 25
 
 
-def _build_messages(system_content: str, user_message: str, supports_system: bool) -> list:
+def _build_messages(system_content: str, user_message: str, supports_system: bool, history: list = None) -> list:
     """
-    Build the messages list.
+    Build the messages list with conversation history.
     For models that don't support a 'system' role, merge the system prompt
     into the first user turn (avoids the 'System role not supported' error).
     """
+    if history is None:
+        history = []
+
     if supports_system:
-        return [
-            {"role": "system", "content": system_content},
-            {"role": "user",   "content": user_message},
-        ]
+        messages = [{"role": "system", "content": system_content}]
+        for msg in history[-8:]:
+            messages.append({"role": msg["role"], "content": msg["content"]})
+        messages.append({"role": "user", "content": user_message})
+        return messages
     else:
-        # Merge system + user into a single user turn
-        merged = f"[Instructions: {system_content}]\n\nUser: {user_message}"
+        # Merge system + history + user into a single user turn
+        history_text = ""
+        for msg in history[-4:]:
+            role = "User" if msg["role"] == "user" else "Assistant"
+            history_text += f"\n{role}: {msg['content']}"
+        merged = f"[Instructions: {system_content}]{history_text}\n\nUser: {user_message}"
         return [{"role": "user", "content": merged}]
 
 
-def call_huggingface_api(user_message: str, context: str = "") -> Optional[str]:
+def call_huggingface_api(user_message: str, context: str = "", history: list = None) -> Optional[str]:
     """
     Call HuggingFace via InferenceClient.
     Tries models in priority order; skips to next on any failure.
     Returns the first successful response, or None if all fail.
     """
+    if history is None:
+        history = []
+
     # Read key dynamically so Railway env vars are always picked up
     hf_key = os.getenv('HF_API_KEY', '').strip()
     if not hf_key or hf_key in ('', 'your-huggingface-api-key-here'):
@@ -125,7 +136,7 @@ def call_huggingface_api(user_message: str, context: str = "") -> Optional[str]:
         max_tokens  = model_cfg["max_tokens"]
         sys_role_ok = model_cfg["system_role"]
 
-        messages = _build_messages(system_content, user_message, sys_role_ok)
+        messages = _build_messages(system_content, user_message, sys_role_ok, history)
 
         try:
             logger.info(f"[HF] Trying model: {model_id}")

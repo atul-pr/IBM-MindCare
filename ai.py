@@ -110,11 +110,18 @@ def _get_rag_context(user_message: str) -> str:
     return ""
 
 
-def get_ai_response(user_message: str) -> str:
+def get_ai_response(user_message: str, history: list = None) -> str:
     """
     Generate empathetic AI response using provider waterfall:
       Groq → HuggingFace → Pattern fallback
+
+    Args:
+        user_message: Current user message
+        history: List of prior messages [{'role': 'user'|'assistant', 'content': '...'}]
     """
+    if history is None:
+        history = []
+
     # Step 0: Topic guardrail
     if not is_relevant_topic(user_message):
         return (
@@ -129,7 +136,7 @@ def get_ai_response(user_message: str) -> str:
 
     # ── Step 1: Groq (ultra-fast, ~0.3-1s) ───────────────────────────────
     try:
-        groq_response = call_groq_api(user_message, context=context)
+        groq_response = call_groq_api(user_message, context=context, history=history)
         if groq_response:
             logger.info("[AI] Provider: Groq ✅")
             return groq_response
@@ -138,7 +145,7 @@ def get_ai_response(user_message: str) -> str:
 
     # ── Step 2: HuggingFace (reliable backup, ~5-25s) ─────────────────────
     try:
-        hf_response = call_huggingface_api(user_message, context=context)
+        hf_response = call_huggingface_api(user_message, context=context, history=history)
         if hf_response:
             logger.info("[AI] Provider: HuggingFace ✅")
             return hf_response

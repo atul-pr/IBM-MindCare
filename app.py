@@ -101,6 +101,21 @@ def health_check():
     })
 
 
+@app.route('/api/status')
+def api_status():
+    """Debug endpoint — shows which API keys are loaded (safe: shows only first 8 chars)."""
+    groq_key = os.getenv('GROQ_API_KEY', '').strip()
+    hf_key   = os.getenv('HF_API_KEY', '').strip()
+    secret   = os.getenv('SECRET_KEY', '').strip()
+    return jsonify({
+        'groq_api_key':   f"{groq_key[:8]}..." if groq_key else 'NOT SET ❌',
+        'hf_api_key':     f"{hf_key[:8]}..."   if hf_key   else 'NOT SET ❌',
+        'secret_key':     'SET ✅'              if secret   else 'NOT SET ❌',
+        'flask_env':      os.getenv('FLASK_ENV', 'NOT SET'),
+        'database_url':   'SET ✅' if os.getenv('DATABASE_URL') else 'using SQLite',
+    })
+
+
 # ============================================================================
 # USER ROUTES (PROTECTED)
 # ============================================================================

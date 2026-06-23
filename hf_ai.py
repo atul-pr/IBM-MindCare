@@ -24,8 +24,9 @@ load_dotenv()
 
 logger = logging.getLogger(__name__)
 
-# Hugging Face Configuration
-HF_API_KEY = os.getenv('HF_API_KEY', '').strip()
+# Hugging Face Configuration — key is read dynamically per-request, not at import time
+# This ensures Railway env vars are always picked up correctly.
+HF_API_KEY = None  # resolved inside call_huggingface_api()
 
 # System prompt — rich but concise to stay under token budget
 SYSTEM_PROMPT = (
@@ -106,9 +107,13 @@ def call_huggingface_api(user_message: str, context: str = "") -> Optional[str]:
     Tries models in priority order; skips to next on any failure.
     Returns the first successful response, or None if all fail.
     """
-    if not HF_API_KEY or HF_API_KEY in ('', 'your-huggingface-api-key-here'):
-        logger.warning("No HF_API_KEY configured — using fallback responses")
+    # Read key dynamically so Railway env vars are always picked up
+    hf_key = os.getenv('HF_API_KEY', '').strip()
+    if not hf_key or hf_key in ('', 'your-huggingface-api-key-here'):
+        logger.warning("[HF] HF_API_KEY not set — skipping HuggingFace")
         return None
+
+    logger.info(f"[HF] API key detected: {hf_key[:8]}... — starting inference")
 
     # Enrich system prompt with RAG context if available
     system_content = SYSTEM_PROMPT
@@ -123,8 +128,8 @@ def call_huggingface_api(user_message: str, context: str = "") -> Optional[str]:
         messages = _build_messages(system_content, user_message, sys_role_ok)
 
         try:
-            logger.info(f"Trying model: {model_id}")
-            client = InferenceClient(model=model_id, token=HF_API_KEY, timeout=REQUEST_TIMEOUT)
+            logger.info(f"[HF] Trying model: {model_id}")
+            client = InferenceClient(model=model_id, token=hf_key, timeout=REQUEST_TIMEOUT)
 
             response = client.chat.completions.create(
                 messages=messages,
@@ -136,15 +141,14 @@ def call_huggingface_api(user_message: str, context: str = "") -> Optional[str]:
             if response and response.choices:
                 result = response.choices[0].message.content.strip()
                 if result:
-                    logger.info(f"✅ Success with: {model_id} ({len(result)} chars)")
+                    logger.info(f"[HF] ✅ Success: {model_id} ({len(result)} chars)")
                     return result
 
         except Exception as exc:
-            err_short = str(exc)[:200]
-            logger.warning(f"❌ {model_id} failed: {err_short}")
+            logger.warning(f"[HF] ❌ {model_id} failed: {str(exc)[:200]}")
             continue
 
-    logger.error("All HF models failed — using pattern-based fallback")
+    logger.error("[HF] All models failed")
     return None
 
 

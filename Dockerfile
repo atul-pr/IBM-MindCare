@@ -32,15 +32,20 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Pre-download the embedding model into /app/hf_cache (baked into image = instant startup)
-RUN python -c "\
+RUN HF_HOME=/app/hf_cache \
+    SENTENCE_TRANSFORMERS_HOME=/app/hf_cache \
+    TRANSFORMERS_OFFLINE=0 \
+    python -c " \
 import os; \
 os.environ['HF_HOME'] = '/app/hf_cache'; \
 os.environ['SENTENCE_TRANSFORMERS_HOME'] = '/app/hf_cache'; \
 from sentence_transformers import SentenceTransformer; \
-SentenceTransformer('all-MiniLM-L6-v2', cache_folder='/app/hf_cache'); \
-print('Embedding model pre-downloaded successfully')" \
-    || echo "Model pre-download skipped — will download at first request"
+model = SentenceTransformer('all-MiniLM-L6-v2', cache_folder='/app/hf_cache'); \
+print('Embedding model pre-downloaded successfully'); \
+" || echo "Model pre-download skipped — will download at first request"
 
 EXPOSE 8080
 
-CMD ["gunicorn", "app:app", "--workers=1", "--timeout=120", "--bind=0.0.0.0:8080", "--log-level=debug", "--access-logfile=-", "--error-logfile=-"]
+# Use sh -c so ${PORT:-8080} is expanded by the shell.
+# 'exec' replaces the shell with gunicorn (proper PID 1 / signal handling).
+CMD ["sh", "-c", "exec gunicorn app:app --workers=1 --timeout=120 --bind 0.0.0.0:${PORT:-8080} --log-level=debug --access-logfile=- --error-logfile=-"]

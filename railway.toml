@@ -1,10 +1,11 @@
 [build]
-# Force Docker builder so nixpacks.toml is ignored
 builder = "DOCKERFILE"
 dockerfilePath = "Dockerfile"
 
 [deploy]
-startCommand = "gunicorn app:app --workers=1 --timeout=120 --bind=0.0.0.0:$PORT --log-level=debug --access-logfile=- --error-logfile=-"
+# CRITICAL: wrap in sh -c so $PORT is expanded by the shell at runtime.
+# Without sh -c, Dockerfile-built services use exec form and $PORT is never expanded.
+startCommand = "sh -c 'exec gunicorn app:app --workers=1 --timeout=120 --bind 0.0.0.0:$PORT --log-level=debug --access-logfile=- --error-logfile=-'"
 healthcheckPath = "/health"
 healthcheckTimeout = 300
 restartPolicyType = "on_failure"

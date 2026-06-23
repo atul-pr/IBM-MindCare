@@ -46,28 +46,35 @@ init_auth(app)
 app.register_blueprint(auth_bp)
 
 # Initialize database and create tables
-with app.app_context():
-    init_db(app)
+try:
+    with app.app_context():
+        init_db(app)
+except Exception as _db_err:
+    print(f"⚠️  Database init warning: {_db_err}")
 
-# Initialize RAG system
-from rag import initialize_rag
-initialize_rag()
+# Initialize RAG system synchronously.
+# Fast path: loads existing faiss_index.pkl from disk (~27KB, <1s).
+# The SentenceTransformer model is lazy-loaded only on first chat query.
+try:
+    from rag import initialize_rag
+    initialize_rag()
+    print("✅ RAG system ready")
+except Exception as _rag_err:
+    print(f"⚠️  RAG init error: {_rag_err} — falling back to pattern responses")
 
-# Startup checks: show which AI providers are active
-import os as _os
-
-_groq_key = _os.getenv('GROQ_API_KEY', '').strip()
+# Startup: log which AI providers are active
+_groq_key = os.getenv('GROQ_API_KEY', '').strip()
 if _groq_key and _groq_key not in ('', 'your-groq-api-key-here'):
-    print(f"✅ GROQ_API_KEY detected: {_groq_key[:8]}...  ← PRIMARY provider (fast!)")
+    print(f"✅ GROQ_API_KEY detected: {_groq_key[:8]}...  ← PRIMARY provider")
 else:
-    print("⚠️  GROQ_API_KEY not set — will fall back to HuggingFace.")
+    print("⚠️  GROQ_API_KEY not set — falling back to HuggingFace.")
 
-_hf_key = _os.getenv('HF_API_KEY', '').strip()
+_hf_key = os.getenv('HF_API_KEY', '').strip()
 if _hf_key and _hf_key not in ('', 'your-huggingface-api-key-here'):
     print(f"✅ HF_API_KEY detected: {_hf_key[:8]}...  ← FALLBACK provider")
 else:
-    print("⚠️  WARNING: HF_API_KEY is not set! Chatbot will use pattern fallback only.")
-    print("   → Set HF_API_KEY in Railway environment variables (Settings → Variables).")
+    print("⚠️  HF_API_KEY not set — chatbot will use pattern fallback only.")
+
 
 
 # ============================================================================
@@ -83,14 +90,14 @@ def index():
 
 @app.route('/health')
 def health_check():
-    """Health check endpoint for deployment"""
-    import os
-    hf_key = os.getenv('HF_API_KEY', '')
+    """Health check endpoint for deployment — always returns 200 immediately."""
+    groq_key = os.getenv('GROQ_API_KEY', '')
+    hf_key   = os.getenv('HF_API_KEY', '')
     return jsonify({
         'status': 'healthy',
         'service': 'HealSpace AI',
-        'hf_api_key_set': bool(hf_key and hf_key not in ('', 'your-huggingface-api-key-here')),
-        'hf_key_preview': f"{hf_key[:6]}..." if len(hf_key) > 6 else 'NOT SET'
+        'groq_key_set': bool(groq_key and groq_key not in ('', 'your-groq-api-key-here')),
+        'hf_key_set':   bool(hf_key and hf_key not in ('', 'your-huggingface-api-key-here')),
     })
 
 

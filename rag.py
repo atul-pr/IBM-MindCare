@@ -30,9 +30,10 @@ os.environ.setdefault('SENTENCE_TRANSFORMERS_HOME', '/tmp/hf_cache')
 
 import pickle
 from typing import List, Dict, Optional
-from sentence_transformers import SentenceTransformer
-import faiss
-import numpy as np
+
+# sentence_transformers, faiss, numpy are imported LAZILY inside functions.
+# This prevents loading ~400MB of ML libraries at startup, which would OOM
+# Railway's 512MB container before gunicorn can even bind to the port.
 
 # Resolve paths relative to THIS file so they work regardless of CWD
 _BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -62,21 +63,21 @@ _chunks_metadata = []
 
 def get_embedding_model():
     """
-    Load sentence transformer model for embeddings
-    
-    WHY THIS MODEL:
-    - all-MiniLM-L6-v2 is lightweight (80MB)
-    - Fast inference (good for demos)
-    - Good quality embeddings
-    - Works offline after first download
+    Load sentence transformer model for embeddings.
+    Imported lazily — only called on first chat query, not at startup.
     """
     global _embedding_model
-    
+
     if _embedding_model is None:
-        print("Loading embedding model (first time may take a minute)...")
-        _embedding_model = SentenceTransformer(EMBEDDING_MODEL)
+        # Lazy import — keeps startup memory under 100MB
+        from sentence_transformers import SentenceTransformer
+        print("Loading embedding model (first query — may take ~30s if downloading)...")
+        _embedding_model = SentenceTransformer(
+            EMBEDDING_MODEL,
+            cache_folder=os.environ.get('HF_HOME', '/tmp/hf_cache')
+        )
         print("Embedding model loaded!")
-    
+
     return _embedding_model
 
 
@@ -197,11 +198,13 @@ def ingest_documents() -> bool:
         
         # Generate embeddings
         print("\nGenerating embeddings...")
+        import numpy as np
         model = get_embedding_model()
         embeddings = model.encode(all_chunks, show_progress_bar=True)
         
         # Build FAISS index
         print("\nBuilding FAISS index...")
+        import faiss
         dimension = embeddings.shape[1]  # 384 for all-MiniLM-L6-v2
         _faiss_index = faiss.IndexFlatL2(dimension)  # L2 distance
         _faiss_index.add(embeddings.astype('float32'))
@@ -242,6 +245,7 @@ def load_vector_store() -> bool:
     
     try:
         with open(VECTOR_DB_PATH, 'rb') as f:
+            import faiss
             data = pickle.load(f)
             _faiss_index = faiss.deserialize_index(data['index'])
             _chunks_metadata = data['metadata']
@@ -286,6 +290,7 @@ def retrieve_relevant_context(query: str, top_k: int = TOP_K_RESULTS) -> List[Di
     
     try:
         # Generate query embedding
+        import numpy as np
         model = get_embedding_model()
         query_embedding = model.encode([query])
         
